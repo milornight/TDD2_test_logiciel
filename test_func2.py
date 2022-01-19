@@ -19,7 +19,9 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func2.deriver([2.5]), [0])
         self.assertEqual(func2.deriver([3.0, 2.5]), [3.0])
         self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [2*2.5, 3.0])
-        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [2*2.5, 3.0])
+        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5]), [3*5.0, 2*2.5, 3.0])
+        self.assertEqual(func2.deriver([1.0, 5.0, 2.5, 3.0, 4.5]), [4*1.0, 3*5.0, 2*2.5, 3.0])
+        self.assertEqual(func2.deriver([3.9, 1.0, 5.0, 2.5, 3.0, 4.5]), [5*3.9, 4*1.0, 3*5.0, 2*2.5, 3.0])
         
         
 

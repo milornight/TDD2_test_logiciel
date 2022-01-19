@@ -20,12 +20,14 @@ def deriver(s):
             return [0]
         else :
             for i in range(l-2, -1, -1):
-                print("indice i est : ", i, "\n")
-                print("element de s[i] est : ", s[i],"\n")
+                #print("indice i est : ", i, "\n")
+                #print("element de s[i] est : ", s[i],"\n")
                 res.append(s[i]*abs(i-l+1))
-            for item in res:
-                print("resultat est : ", item, " ")
             res.reverse()
+            # vérification le résultat
+            print("resultat est : ")
+            for item in res:
+                print(item," ")
             return res
 
 
