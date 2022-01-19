@@ -12,12 +12,13 @@ class TestFuncs(unittest.TestCase):
         # Entrée est une liste vide
         self.assertEqual(func2.deriver([]),None)
         # Test pour les résultats
+        self.assertEqual(func2.deriver([2.5]), [0])
+        self.assertFalse(func2.deriver([2.0]), None) # return est vide au lieu de la liste [0]
+        self.assertFalse(func2.deriver([2.0]), False) # return est vide au lieu de la liste [0]
         self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [6.25, 3.0])
         self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [2.5*2.5, 3.0])
-        self.assertEqual(func2.deriver([3.0, 2.5], [3.0]))
-        self.assertEqual(func2.deriver([2.5]), [0])
-        self.assertFalse(func2.deriver([2.0], None)) # return est vide au lieu de la liste [0]
-        self.assertFalse(func2.deriver([2.0], False)) # return est vide au lieu de la liste [0]
+        self.assertEqual(func2.deriver([3.0, 2.5]), [3.0])
+        
 
 
 if __name__ == '__main__':
