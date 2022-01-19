@@ -7,8 +7,8 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(funcs3.derive2([]),None) # liste empty
 
         # liste entre ne sont pas forcement une liste float
-        self.assertFalse(funcs3.derive2(["d"])) 
-        self.assertFalse(funcs3.derive2([3, 4])) 
+        self.assertFalse(funcs3.derive2(["d","fhe","1.48"])) 
+        self.assertFalse(funcs3.derive2([3, 4, 6, 8])) 
 
         self.assertEqual(funcs3.derive2([0.0]),None) # trop peu de points pour determiner la derive seconde 
 
