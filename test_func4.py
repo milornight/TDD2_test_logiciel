@@ -40,9 +40,11 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func4.appro([4.0], 3.0, 1+2j), "Error: The third parameter is not a float")
         self.assertEqual(func4.appro([4.0], 3.0, [3]), "Error: The third parameter is not a float")
         self.assertEqual(func4.appro([4.0], 3.0, 0.02), "Error: The third parameter is not a order of magnitude")
+        self.assertEqual(func4.appro([4.0], 3.0, 1.0), "Error: The third parameter is not a order of magnitude")
 
-        
-        
+        # Test pour le resultat
+        self.assertEqual(func4.appro([4.0], 3.0, 0.1), 0.0)
+        self.assertEqual(func4.appro([4.0], 3.0, 0.01), 0.00)
         
 
 if __name__ == '__main__':
