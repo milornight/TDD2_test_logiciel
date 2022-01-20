@@ -55,6 +55,11 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func4.appro([4.0], 3.0, 0.1), 0.0)
         self.assertEqual(func4.appro([4.0], 3.0, 0.01), 0.00)
         self.assertEqual(func4.appro([1.0, 3.0], 3.5, 0.01), 1.00)
-
+        self.assertEqual(func4.appro([1.0, 1.0, 3.0], 3.5, 0.01), 8.00)
+        self.assertEqual(func4.appro([1.0, -1.0, 3.0], 3.5, 0.01), 6.00) # avec un coef negatif
+        self.assertEqual(func4.appro([1.0, 1.0, 3.0], 3.5, 0.001), 8.000) # avec un ordre de grandeur plus petit
+        self.assertEqual(func4.appro([1.0, 1.0, 1.0, 3.0], 3.5, 0.01), 44.75)
+        self.assertEqual(func4.appro([2.0, 2.0, 1.0, 3.0], 3.5, 0.01), 88.50)
+        
 if __name__ == '__main__':
     unittest.main()
