@@ -2,33 +2,27 @@ from cgi import print_directory
 import string
 import math
 
+# le format de s est [f(x0+h), f(x0)] ou [f(x0+h), f(x0), h]
 def deriver(s):
     if (s==None):
         return None
     l = len(s)
-    res = []
-    # parcour la liste s à vérifier le type des éléments
-    if l == 0:
+    res = 0
+    # parcour la liste s pour verifier le type des elements
+    if l < 2 or l > 3:
         return None
     else :
         for item in s:
             if( type(item) != float):
                 print(item)
                 return False
-        # calcule la dérivée de s
-        if l == 1:
-            return [0]
+        # calcule la derivee de s
+        if l == 2:
+            # h est 1 par defaut
+            return s[0]-s[1]
         else :
-            for i in range(l-2, -1, -1):
-                #print("indice i est : ", i, "\n")
-                #print("element de s[i] est : ", s[i],"\n")
-                res.append(s[i]*abs(i-l+1))
-            res.reverse()
-            # vérification le résultat
-            print("resultat est : ")
-            for item in res:
-                print(item," ")
-            return res
+
+            return round((s[0]-s[1])/s[2],2)
 
 
        
