@@ -28,7 +28,7 @@ def appro(fonc, point, ordre):
     else :
         for item in fonc:
             if( not isinstance(item, float)):
-                print(item)
+                #print(item)
                 return "Error: Elements in the first parameter are not float"
         res = 0
         if( length == 1 ) :
