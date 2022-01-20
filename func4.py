@@ -36,18 +36,19 @@ def appro(fonc, point, ordre):
         else :
             x_add_h = point + ordre
             x_moins_h = point - ordre
-            for i in range(length-2, -1, -1):
-                print("element de s[i] est : ", fonc[i])
-                expo = abs(i-length+1)
-                print("exponentielle est : ", expo)
-                for x in range(expo):
-                    x_add_h *= x_add_h
-                    x_moins_h *= x_moins_h
-                x_add_h = x_add_h * fonc[i]
-                x_moins_h = x_moins_h * fonc[i]
-                res = x_add_h - x_moins_h
+            for i in range(length-1):
+                expo = length-i-1
+                a = x_add_h
+                b = x_moins_h
+                c = 0
+                for x in range(expo-1):
+                    a *= x_add_h
+                    b *= x_moins_h
+                a = a * fonc[i]
+                b = b * fonc[i]
+                c = a - b
+                res +=c
             res = res / (2*ordre)
-            print("res est : ", res)
             res = arrondi(res, ordre)
             return res
 
@@ -55,8 +56,6 @@ def arrondi(val, arr):
     arr_str = str(arr)
     digits_location = arr_str.find('.')
     nombre = len(arr_str[digits_location + 1:])
-    print('nombre est : ', nombre)
-
     val_str = str(val)
     if ( len(val_str) < len(arr_str)) :
         return float(val_str)
