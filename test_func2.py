@@ -21,7 +21,7 @@ class TestFuncs(unittest.TestCase):
         self.assertIsNone(func2.deriver(None))
 
         # Test pour les résultats
-        self.assertEqual(func2.deriver([3.0, 2.5]), [3.0])
-        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [2*2.5, 3.0])
-        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), [4*1.0, 3*5.0, 2*2.5, 3.0])
-        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), [5*3.9, 4*1.0, 3*5.0, 2*2.5, 3.0])
+        self.assertEqual(func2.deriver([3.0, 2.5]), 0.5)
+        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), -0.11)
+        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), -1.6)
+        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), 0.58)
