@@ -1,3 +1,4 @@
+from binascii import b2a_base64
 import string
 import math
 from decimal import *
@@ -21,15 +22,44 @@ def appro(fonc, point, ordre):
             return "Error: The third parameter is not a order of magnitude"
         else :
             arr = str(ordre)
-
-    if len(fonc) == 0:
+    length = len(fonc)
+    if length == 0:
         return "Error: The first parameter is empty"
     else :
         for item in fonc:
             if( not isinstance(item, float)):
                 print(item)
                 return "Error: Elements in the first parameter are not float"
-        if(len(fonc) == 1) :
+        res = 0
+        if( length == 1 ) :
             return Decimal(0).quantize(Decimal(arr))
-        return True
+        else :
+            x_add_h = point + ordre
+            x_moins_h = point - ordre
+            for i in range(length-2, -1, -1):
+                print("element de s[i] est : ", fonc[i])
+                expo = abs(i-length+1)
+                print("exponentielle est : ", expo)
+                for x in range(expo):
+                    x_add_h *= x_add_h
+                    x_moins_h *= x_moins_h
+                x_add_h = x_add_h * fonc[i]
+                x_moins_h = x_moins_h * fonc[i]
+                res = x_add_h - x_moins_h
+            res = res / (2*ordre)
+            print("res est : ", res)
+            res = arrondi(res, ordre)
+            return res
+
+def arrondi(val, arr):
+    arr_str = str(arr)
+    digits_location = arr_str.find('.')
+    nombre = len(arr_str[digits_location + 1:])
+    print('nombre est : ', nombre)
+
+    val_str = str(val)
+    if ( len(val_str) < len(arr_str)) :
+        return float(val_str)
+    else :
+        return round(val, nombre)
 
