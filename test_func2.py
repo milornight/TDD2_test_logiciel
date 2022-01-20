@@ -35,3 +35,6 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), -0.11)
         self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), -1.6)
         self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), 0.58)
+
+if __name__ == '__main__':
+    unittest.main()
