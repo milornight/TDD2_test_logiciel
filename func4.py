@@ -1,5 +1,6 @@
 import string
 import math
+from decimal import *
 
 # les entrees sont (fonc, point, ordre)
 # fonc : type liste float [3.5, 4.0, 4.5, 3.0] = 3.5x^3 + 4.0*x^2 + 4.5*x + 3.0
@@ -18,13 +19,17 @@ def appro(fonc, point, ordre):
     else :
         if ordre not in list_ordre:
             return "Error: The third parameter is not a order of magnitude"
-            
+        else :
+            arr = str(ordre)
+
     if len(fonc) == 0:
         return "Error: The first parameter is empty"
     else :
-            for item in fonc:
-                if( not isinstance(item, float)):
-                    print(item)
-                    return "Error: Elements in the first parameter are not float"
-            return True
+        for item in fonc:
+            if( not isinstance(item, float)):
+                print(item)
+                return "Error: Elements in the first parameter are not float"
+        if(len(fonc) == 1) :
+            return Decimal(0).quantize(Decimal(arr))
+        return True
 
