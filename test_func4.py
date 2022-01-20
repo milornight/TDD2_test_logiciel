@@ -42,10 +42,19 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func4.appro([4.0], 3.0, 0.02), "Error: The third parameter is not a order of magnitude")
         self.assertEqual(func4.appro([4.0], 3.0, 1.0), "Error: The third parameter is not a order of magnitude")
 
+        # Test pour la fonction d'arrondi
+        self.assertEqual(func4.arrondi(1.456, 0.1), 1.5)
+        self.assertEqual(func4.arrondi(1.456, 0.01), 1.46)
+        self.assertEqual(func4.arrondi(1.456, 0.001), 1.456)
+        self.assertEqual(func4.arrondi(1.456, 0.0001), 1.456)
+        self.assertEqual(func4.arrondi(1.454, 0.01), 1.45)
+        self.assertEqual(func4.arrondi(1.499, 0.1), 1.5)
+        self.assertEqual(func4.arrondi(1.499, 0.01), 1.50)
+
         # Test pour le resultat
         self.assertEqual(func4.appro([4.0], 3.0, 0.1), 0.0)
         self.assertEqual(func4.appro([4.0], 3.0, 0.01), 0.00)
-        
+        self.assertEqual(func4.appro([1.0, 3.0], 3.5, 0.01), 1.00)
 
 if __name__ == '__main__':
     unittest.main()
