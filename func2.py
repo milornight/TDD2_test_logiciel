@@ -2,14 +2,14 @@ from cgi import print_directory
 import string
 import math
 
-# le format de s est [f(x0+h), f(x0)] ou [f(x0+h), f(x0), h]
+# le format de s est [f(x0), f(x0+h), f(x0+2h), ...]
+# h = 0.1 par defaut
 def deriver(s):
     if (s==None):
         return None
     l = len(s)
-    res = 0
     # parcour la liste s pour verifier le type des elements
-    if l < 2 or l > 3:
+    if l < 2 :
         return None
     else :
         for item in s:
@@ -17,12 +17,16 @@ def deriver(s):
                 print(item)
                 return False
         # calcule la derivee de s
+        res = []
         if l == 2:
-            # h est 1 par defaut
-            return s[0]-s[1]
+            res.append(round((s[1]-s[0])/0.1, 2))
+            return res
         else :
-
-            return round((s[0]-s[1])/s[2],2)
+            for i in range(l-1) :
+                print("s[",i,"] est : ", s[i])
+                print("s[",i+1,"] est : ", s[i+1])
+                res.append(round((s[i+1]-s[i])/0.1, 2))
+            return res
 
 
        
