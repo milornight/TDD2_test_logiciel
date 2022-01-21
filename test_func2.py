@@ -22,19 +22,19 @@ class TestFuncs(unittest.TestCase):
         self.assertEqual(func2.deriver([1.0, 3.0, 1+5j]), False) 
         self.assertEqual(func2.deriver([1.0, 3.0, "a"]), False)
         self.assertEqual(func2.deriver([1.0, 2.0, 3]), False)
-        # la taille d'entree est trop grande
-        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5]), None)
-        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5, 6.0]), None)
+
         # Entree est une liste vide
         self.assertIsNone(func2.deriver([]))
         # Entree est vide
         self.assertIsNone(func2.deriver(None))
 
         # Test pour les resultats
-        self.assertEqual(func2.deriver([3.0, 2.5]), 0.5)
-        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), -0.11)
-        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), -1.6)
-        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), 0.58)
+        self.assertEqual(func2.deriver([3.0, 2.5]), [-5])
+        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [5, 15])
+        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), [50, 25])
+        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), [-29, 40])
+        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5]), [25, 5, 15])
+        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5, 6.0]), [25, 5, 15, 15])
 
 if __name__ == '__main__':
     unittest.main()
