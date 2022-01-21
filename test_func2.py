@@ -29,12 +29,12 @@ class TestFuncs(unittest.TestCase):
         self.assertIsNone(func2.deriver(None))
 
         # Test pour les resultats
-        self.assertEqual(func2.deriver([3.0, 2.5]), [-5])
-        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [5, 15])
-        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), [50, 25])
-        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), [-29, 40])
-        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5]), [25, 5, 15])
-        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5, 6.0]), [25, 5, 15, 15])
+        self.assertEqual(func2.deriver([3.0, 2.5]), [-5.0])
+        self.assertEqual(func2.deriver([2.5, 3.0, 4.5]), [5.0, 15.0])
+        self.assertEqual(func2.deriver([1.0, 5.0, 2.5]), [40.0, -25.0])
+        self.assertEqual(func2.deriver([3.9, 1.0, 5.0]), [-29.0, 40.0])
+        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5]), [-25.0, 5.0, 15.0])
+        self.assertEqual(func2.deriver([5.0, 2.5, 3.0, 4.5, 6.0]), [-25.0, 5.0, 15.0, 15.0])
 
 if __name__ == '__main__':
     unittest.main()
