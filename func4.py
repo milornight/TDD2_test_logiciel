@@ -10,18 +10,17 @@ from scipy import misc
 # point : type float
 # ordre : type float
 x = symbols('x')
-y = symbols('y')
 list_ordre = [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001]
 function = [math.sin, math.cos, math.tan, math.exp, math.expm1,\
-            math.log, math.log2, math.log10, math.sqrt]#math.pow(x, y)]
+            math.log, math.log2, math.log10, math.sqrt]
 func_symbolic = [sin(x), cos(x), tan(x), exp(x), exp(x)-1,\
-                log(x), log(x)/log(2), log(x)/log(10), sqrt(x)]#, x**y ]
+                log(x), log(x)/log(2), log(x)/log(10), sqrt(x)]
 def appro(fonc, point, ordre):
     # "Error: Missing parameters"
     if (fonc == None or point == None or ordre == None):
         return 200 
     
-     # "Error: The first parameter is not a function"
+     # "Error: The first parameter is not a mathematic function"
     if fonc not in function :
         return 210 
     
@@ -40,15 +39,12 @@ def appro(fonc, point, ordre):
         #calculer l'approximation de la derivee de la fonction
             expr = func_symbolic[function.index(fonc)] # recuperer fonction symbolique correspondante
             exp_deriv = expr.diff(x) # calculer la derivee
-            print("expression de derivee", exp_deriv)
-            if y in globals():
-                exp_deriv = lambdify([x,y], exp_deriv) # rend la variable calculable
-            else :
-                exp_deriv = lambdify(x, exp_deriv)  
-            print("expression de derivee en point", exp_deriv(point))
+            #print("expression de derivee", exp_deriv)
+            exp_deriv = lambdify(x, exp_deriv)  # rend la variable calculable
+            #print("expression de derivee en point", exp_deriv(point))
             res = arrondi(exp_deriv(point), ordre)
             return res
-            
+
 def arrondi(val, arr):
     arr_str = str(arr)
     digits_location = arr_str.find('.')
