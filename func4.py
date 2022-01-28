@@ -1,57 +1,54 @@
-from binascii import b2a_base64
 import string
 import math
 from decimal import *
+from sympy import *
+from sympy.utilities.lambdify import lambdify, implemented_function
+from scipy import misc
 
 # les entrees sont (fonc, point, ordre)
 # fonc : type liste float [3.5, 4.0, 4.5, 3.0] = 3.5x^3 + 4.0*x^2 + 4.5*x + 3.0
 # point : type float
 # ordre : type float
+x = symbols('x')
+y = symbols('y')
 list_ordre = [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001]
+function = [math.sin, math.cos, math.tan, math.exp, math.expm1,\
+            math.log, math.log2, math.log10, math.sqrt]#math.pow(x, y)]
+func_symbolic = [sin(x), cos(x), tan(x), exp(x), exp(x)-1,\
+                log(x), log(x)/log(2), log(x)/log(10), sqrt(x)]#, x**y ]
 def appro(fonc, point, ordre):
+    # "Error: Missing parameters"
     if (fonc == None or point == None or ordre == None):
-        return "Error: Missing parameters"
-    if not isinstance(fonc, list) :
-        return "Error: The first parameter is not a list"
+        return 200 
+    
+     # "Error: The first parameter is not a function"
+    if fonc not in function :
+        return 210 
+    
+    # "Error: The second parameter is not a float"
     if not isinstance(point, float) :
-        return "Error: The second parameter is not a float"
-    if  not isinstance(ordre, float) :
-        return "Error: The third parameter is not a float"
-    else :
-        if ordre not in list_ordre:
-            return "Error: The third parameter is not a order of magnitude"
-        else :
-            arr = str(ordre)
-    length = len(fonc)
-    if length == 0:
-        return "Error: The first parameter is empty"
-    else :
-        for item in fonc:
-            if( not isinstance(item, float)):
-                #print(item)
-                return "Error: Elements in the first parameter are not float"
-        res = 0
-        if( length == 1 ) :
-            return Decimal(0).quantize(Decimal(arr))
-        else :
-            x_add_h = point + ordre
-            x_moins_h = point - ordre
-            for i in range(length-1):
-                expo = length-i-1
-                a = x_add_h
-                b = x_moins_h
-                c = 0
-                for x in range(expo-1):
-                    a *= x_add_h
-                    b *= x_moins_h
-                a = a * fonc[i]
-                b = b * fonc[i]
-                c = a - b
-                res +=c
-            res = res / (2*ordre)
-            res = arrondi(res, ordre)
-            return res
+        return 220
 
+    # "Error: The third parameter is not a float"
+    if  not isinstance(ordre, float) :
+        return 230
+    else :
+        # "Error: The third parameter is not a order of magnitude"
+        if ordre not in list_ordre:
+            return 231
+        else :
+        #calculer l'approximation de la derivee de la fonction
+            expr = func_symbolic[function.index(fonc)] # recuperer fonction symbolique correspondante
+            exp_deriv = expr.diff(x) # calculer la derivee
+            print("expression de derivee", exp_deriv)
+            if y in globals():
+                exp_deriv = lambdify([x,y], exp_deriv) # rend la variable calculable
+            else :
+                exp_deriv = lambdify(x, exp_deriv)  
+            print("expression de derivee en point", exp_deriv(point))
+            res = arrondi(exp_deriv(point), ordre)
+            return res
+            
 def arrondi(val, arr):
     arr_str = str(arr)
     digits_location = arr_str.find('.')
