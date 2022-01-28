@@ -6,13 +6,14 @@ from sympy.utilities.lambdify import lambdify, implemented_function
 from scipy import misc
 
 # les entrees sont (fonc, point, ordre)
-# fonc : type liste float [3.5, 4.0, 4.5, 3.0] = 3.5x^3 + 4.0*x^2 + 4.5*x + 3.0
+# fonc : type mathematic function, it must be in the function list <function>
 # point : type float
 # ordre : type float
 x = symbols('x')
 list_ordre = [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001]
 function = [math.sin, math.cos, math.tan, math.exp, math.expm1,\
             math.log, math.log2, math.log10, math.sqrt]
+#symbolic function list
 func_symbolic = [sin(x), cos(x), tan(x), exp(x), exp(x)-1,\
                 log(x), log(x)/log(2), log(x)/log(10), sqrt(x)]
 def appro(fonc, point, ordre):
