@@ -46,7 +46,7 @@ class TestFuncs(unittest.TestCase):
 
     def test_approximation(self):
         # Test pour le resultat
-        self.assertEqual(func4.appro(math.sin, 3.0, 0.1), -1.0)
+        self.assertEqual(func4.appro(math.sin, math.pi/2, 0.01), 0.00)
         self.assertEqual(func4.appro(math.sin, 3.0, 0.01), -0.99) # avec un ordre de grandeur plus petit
         self.assertEqual(func4.appro(math.exp, 3.5, 0.01), 33.12)
         self.assertEqual(func4.appro(math.log, 3.5, 0.01), 0.29)
